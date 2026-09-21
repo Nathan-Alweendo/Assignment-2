@@ -1,0 +1,12 @@
+# Ballerina build directories
+.ballerina/
+target/
+Ballerina.executable
+cloud/
+
+# Docker / DB local storage volumes
+mongo-data/
+
+# OS specific files
+.DS_Store
+Thumbs.db
