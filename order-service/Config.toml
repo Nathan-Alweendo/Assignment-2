@@ -1,0 +1,2 @@
+kafkaBootstrap="localhost:9092"
+mongoUrl="mongodb://localhost:27017/order_db"
