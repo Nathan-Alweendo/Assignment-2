@@ -2,13 +2,13 @@ import ballerina/http;
 import ballerina/uuid;
 import ballerina/time;
 
-// FIXED: Injected Cross-Origin Resource Sharing rules into the service configuration block
 @http:ServiceConfig {
     cors: {
         allowOrigins: ["*"]
     }
 }
-service /orders on new http:Listener(8080) {
+// FIXED: Changed port 8081 to 8080 so it maps cleanly to the customer gateway entry point
+service /orders on new http:Listener(8080, config = { host: "0.0.0.0" }) {
 
     # POST Endpoint: Accepts incoming customer checkout payloads
     # + req - The inbound structured object representation mapping out the selected dishes and coordinates

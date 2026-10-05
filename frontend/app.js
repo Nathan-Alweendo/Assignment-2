@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const orderForm = document.getElementById("order-form");
 
-    // Enforce a strict safeguard check: only execute if the checkout form exists on the current page
     if (!orderForm) return;
 
     orderForm.addEventListener("submit", async (e) => {
@@ -10,22 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const customerName = document.getElementById("customerName").value;
         const generatedCustomerId = "cust-" + Math.floor(1000 + Math.random() * 9000);
 
+        // COMPREHENSIVE LOOP FOR ALL 7 MENU ITEMS
         const items = [];
-        if (document.getElementById("item1").checked) {
-            items.push({
-                itemId: document.getElementById("item1").value,
-                name: document.getElementById("item1").dataset.name,
-                quantity: parseInt(document.getElementById("qty1").value),
-                price: parseFloat(document.getElementById("item1").dataset.price)
-            });
+        const maxItems = 7;
+        
+        for (let i = 1; i <= maxItems; i++) {
+            const checkbox = document.getElementById(`item${i}`);
+            const qtyInput = document.getElementById(`qty${i}`);
+            
+            if (checkbox && checkbox.checked) {
+                items.push({
+                    itemId: checkbox.value,
+                    name: checkbox.dataset.name,
+                    quantity: parseInt(qtyInput.value),
+                    price: parseFloat(checkbox.dataset.price)
+                });
+            }
         }
-        if (document.getElementById("item2").checked) {
-            items.push({
-                itemId: document.getElementById("item2").value,
-                name: document.getElementById("item2").dataset.name,
-                quantity: parseInt(document.getElementById("qty2").value),
-                price: parseFloat(document.getElementById("item2").dataset.price)
-            });
+
+        // Prevent empty order forms from triggering network request pipelines
+        if (items.length === 0) {
+            alert("Please select at least one menu item before submitting checkout!");
+            return;
         }
 
         const payload = {
@@ -43,11 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             const data = await res.json();
             
-            // Stash variables inside the client cache layer cleanly
             localStorage.setItem("currentOrderData", JSON.stringify(data));
             localStorage.setItem("clientName", customerName);
             
-            // Redirect smoothly to the separate visual courier timeline page
             window.location.href = "tracking.html";
         } catch (err) {
             alert("Error communicating with order-service (Is it running?)");

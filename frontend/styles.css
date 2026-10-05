@@ -184,3 +184,10 @@ input[type="text"], select {
 .nav-link:hover {
     background: var(--border-color);
 }
+.menu-category h4 {
+    margin: 15px 0 8px 0;
+    color: var(--accent-blue);
+    font-size: 15px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 3px;
+}

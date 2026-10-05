@@ -36,18 +36,59 @@
                 </div>
 
                 <div class="menu-selection">
-                    <h3>Menu Items</h3>
-                    <div class="menu-item">
-                        <input type="checkbox" id="item1" value="item-01" data-name="Gourmet Beef Burger" data-price="120.00" checked>
-                        <label>Gourmet Beef Burger (N$ 120.00)</label>
-                        <input type="number" id="qty1" value="2" min="1">
-                    </div>
-                    <div class="menu-item">
-                        <input type="checkbox" id="item2" value="item-02" data-name="Large French Fries" data-price="45.00" checked>
-                        <label>Large French Fries (N$ 45.00)</label>
-                        <input type="number" id="qty2" value="1" min="1">
-                    </div>
-                </div>
+    <h3>📋 Select Your Meal Items</h3>
+    
+    <!-- GROUP 1: MAINS -->
+    <div class="menu-category">
+        <h4>🍔 Mains</h4>
+        <div class="menu-item">
+            <input type="checkbox" id="item1" value="item-01" data-name="Gourmet Beef Burger" data-price="120.00" checked>
+            <label>Gourmet Beef Burger (N$ 120.00)</label>
+            <input type="number" id="qty1" value="1" min="1">
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item3" value="item-03" data-name="Flame-Grilled Quarter Chicken" data-price="95.00">
+            <label>Flame-Grilled 1/4 Chicken (N$ 95.00)</label>
+            <input type="number" id="qty3" value="1" min="1">
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item4" value="item-04" data-name="Woodfired Margherita Pizza" data-price="110.00">
+            <label>Woodfired Margherita Pizza (N$ 110.00)</label>
+            <input type="number" id="qty4" value="1" min="1">
+        </div>
+    </div>
+
+    <!-- GROUP 2: SIDES -->
+    <div class="menu-category">
+        <h4>🍟 Sides</h4>
+        <div class="menu-item">
+            <input type="checkbox" id="item2" value="item-02" data-name="Large French Fries" data-price="45.00" checked>
+            <label>Large French Fries (N$ 45.00)</label>
+            <input type="number" id="qty2" value="1" min="1">
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item5" value="item-05" data-name="Creamy Garlic Onion Rings" data-price="35.00">
+            <label>Creamy Garlic Onion Rings (N$ 35.00)</label>
+            <input type="number" id="qty5" value="1" min="1">
+        </div>
+    </div>
+
+    <!-- GROUP 3: BEVERAGES -->
+    <div class="menu-category">
+        <h4>🥤 Beverages</h4>
+        <div class="menu-item">
+            <input type="checkbox" id="item6" value="item-06" data-name="Ice Cold Coca-Cola Can" data-price="20.00">
+            <label>Ice Cold Coca-Cola Can (N$ 20.00)</label>
+            <input type="number" id="qty6" value="1" min="1">
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item7" value="item-07" data-name="Fresh Tropical Juice" data-price="25.00">
+            <label>Fresh Tropical Juice (N$ 25.00)</label>
+            <input type="number" id="qty7" value="1" min="1">
+        </div>
+    </div>
+</div>
+
 
                 <button type="submit" class="btn btn-submit">Submit Order & Pay</button>
             </form>

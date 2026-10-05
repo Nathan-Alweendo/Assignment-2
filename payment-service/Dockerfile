@@ -1,14 +1,13 @@
-# Use the official Ballerina runtime environment image
+# Phase 1: Build the artifact using the Ballerina Swan Lake environment
 FROM ballerina/ballerina:2201.13.5 AS builder
 USER root
 WORKDIR /home/ballerina/src
 COPY . .
-# Compile the production artifact directly inside the container environment
 RUN bal build --cloud="none"
 
-FROM eclipse-temurin:17-jre-jammy
+# Phase 2: FIXED: Use Java 21 (eclipse-temurin:21-jre-jammy) to match compilation formats perfectly
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
-# Extract the compiled binary package from the builder phase layer cleanly
 COPY --from=builder /home/ballerina/src/target/bin/*.jar app.jar
 EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]

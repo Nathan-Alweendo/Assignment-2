@@ -6,7 +6,9 @@ import ballerina/http;
         allowOrigins: ["*"]
     }
 }
-service /admin on new http:Listener(8081) { // Running on port 8081 to avoid conflicts
+// FIXED: Explicitly bind the admin listener to 0.0.0.0 as well
+service /admin on new http:Listener(8081, config = { host: "0.0.0.0" }) {
+ // Running on port 8081 to avoid conflicts
 
     # GET Endpoint: Calculates and returns live system performance parameters
     # + return - A json payload summary containing revenue metrics and platform analytics ratios or a routing error
