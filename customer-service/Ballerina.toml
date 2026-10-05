@@ -1,0 +1,9 @@
+[package]
+org = "Doc"
+name = "customer_service"
+version = "0.1.0"
+distribution = "2201.8.0"
+
+[dependencies]
+"ballerinax/mongodb" = "4.1.0"
+"ballerinax/kafka" = "3.1.0"
