@@ -1,6 +1,19 @@
 version: "3.8"
 
 services:
+
+  restaurant-service:
+    build: ./restaurant-service
+    container_name: food-delivery-restaurant
+    depends_on:
+      - kafka
+      - mongo
+    ports:
+      - "9091:9091"
+    environment:
+      BAL_CONFIG_VAR_KAFKAURL: kafka:29092
+      BAL_CONFIG_VAR_MONGOURL: mongodb://mongo:27017
+      
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.0
     container_name: food-delivery-zookeeper
