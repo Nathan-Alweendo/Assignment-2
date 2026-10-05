@@ -2,10 +2,17 @@ import ballerina/http;
 import ballerina/uuid;
 import ballerina/time;
 
-// Expose the REST API on public port 8080
+// FIXED: Injected Cross-Origin Resource Sharing rules into the service configuration block
+@http:ServiceConfig {
+    cors: {
+        allowOrigins: ["*"]
+    }
+}
 service /orders on new http:Listener(8080) {
 
-    // POST Endpoint: Accepts incoming customer checkout payloads
+    # POST Endpoint: Accepts incoming customer checkout payloads
+    # + req - The inbound structured object representation mapping out the selected dishes and coordinates
+    # + return - The generated food order record summary complete with tracking identification metrics
     resource function post .(OrderRequest req) returns FoodOrder|error {
         // Calculate the subtotal cost dynamically across all items ordered
         decimal total = 0;
@@ -35,7 +42,9 @@ service /orders on new http:Listener(8080) {
         return newOrder;
     }
 
-    // GET Endpoint: Allows users or frontends to poll their order status by ID
+    # GET Endpoint: Allows users or frontends to poll their order status by ID
+    # + orderId - The target tracking key generated during initial compilation processes
+    # + return - The tracking metadata description, a NotFound instance code, or a processing exception
     resource function get [string orderId]() returns FoodOrder|http:NotFound|error {
         FoodOrder? targetOrder = check findOrder(orderId);
         if targetOrder is () {

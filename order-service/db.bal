@@ -1,6 +1,6 @@
 import ballerinax/mongodb;
 
-configurable string mongoUrl = "mongodb://mongo:27017/order_db";
+configurable string mongoUrl = "mongodb://localhost:27017/order_db";
 
 final mongodb:Client mongoClient = check new ({
     connection: {

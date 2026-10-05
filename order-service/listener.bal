@@ -1,6 +1,6 @@
 import ballerinax/kafka;
 
-configurable string kafkaBootstrap = "kafka:9092";
+configurable string kafkaBootstrap = "localhost:9092";
 
 listener kafka:Listener platformListener = new (kafkaBootstrap, {
     groupId: "order-service-group",

@@ -1,19 +1,7 @@
 version: "3.8"
 
 services:
-
-  restaurant-service:
-    build: ./restaurant-service
-    container_name: food-delivery-restaurant
-    depends_on:
-      - kafka
-      - mongo
-    ports:
-      - "9091:9091"
-    environment:
-      BAL_CONFIG_VAR_KAFKAURL: kafka:29092
-      BAL_CONFIG_VAR_MONGOURL: mongodb://mongo:27017
-      
+  # Centralized Infrastructure Core
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.0
     container_name: food-delivery-zookeeper
@@ -45,6 +33,93 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+
+  # 1. Order Service (Your Service)
+  order-service:
+    build: ./order-service
+    container_name: food-delivery-order
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+      - mongo
+    environment:
+      BAL_CONFIG_VAR_KAFKABOOTSTRAP: kafka:29092
+      BAL_CONFIG_VAR_MONGOURL: mongodb://mongo:27017/order_db
+
+  # 2. Admin Service (Your Management Service)
+  admin-service:
+    build: ./admin-service
+    container_name: food-delivery-admin
+    ports:
+      - "8081:8081"
+    depends_on:
+      - kafka
+      - mongo
+    environment:
+      BAL_CONFIG_VAR_KAFKABOOTSTRAP: kafka:29092
+      BAL_CONFIG_VAR_MONGOURL: mongodb://mongo:27017/admin_db
+
+  # 3. Restaurant Service (Teammate's Original Assignment Setup)
+  restaurant-service:
+    build: ./restaurant-service
+    container_name: food-delivery-restaurant
+    ports:
+      - "9091:9091"
+    depends_on:
+      - kafka
+      - mongo
+    environment:
+      BAL_CONFIG_VAR_KAFKABOOTSTRAP: kafka:29092
+      BAL_CONFIG_VAR_MONGOURL: mongodb://mongo:27017/restaurant_db
+
+  # 4. Customer Service
+  customer-service:
+    build: ./customer-service
+    container_name: food-delivery-customer
+    ports:
+      - "9090:9090"
+    depends_on:
+      - kafka
+      - mongo
+    environment:
+      BAL_CONFIG_VAR_KAFKABOOTSTRAP: kafka:29092
+      BAL_CONFIG_VAR_MONGOURL: mongodb://mongo:27017/customer_db
+
+  # 5. Payment Service
+  payment-service:
+    build: ./payment-service
+    container_name: food-delivery-payment
+    ports:
+      - "9093:9093"
+    depends_on:
+      - kafka
+      - mongo
+    environment:
+      BAL_CONFIG_VAR_KAFKABOOTSTRAP: kafka:29092
+      BAL_CONFIG_VAR_MONGOURL: mongodb://mongo:27017/payment_db
+
+  # 6. Delivery Service
+  delivery-service:
+    build: ./delivery-service
+    container_name: food-delivery-delivery
+    ports:
+      - "9094:9094"
+    depends_on:
+      - kafka
+      - mongo
+    environment:
+      BAL_CONFIG_VAR_KAFKABOOTSTRAP: kafka:29092
+      BAL_CONFIG_VAR_MONGOURL: mongodb://mongo:27017/delivery_db
+
+  # 7. Notification Service (Pure event consumer, no database needed)
+  notification-service:
+    build: ./notification-service
+    container_name: food-delivery-notification
+    depends_on:
+      - kafka
+    environment:
+      BAL_CONFIG_VAR_KAFKABOOTSTRAP: kafka:29092
 
 volumes:
   mongo-data:

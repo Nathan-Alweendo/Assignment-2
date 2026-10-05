@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Checkout Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1>🛒 Food Express <span>Customer Portal</span></h1>
+        <div class="navigation-links">
+            <a href="admin.html" class="nav-link">📊 Go to Management Admin Panel</a>
+        </div>
+    </header>
+
+    <div class="single-panel-container">
+        <section class="panel-section">
+            <h2>Place Your Checkout Order</h2>
+            <form id="order-form">
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <!-- FIXED: Replaced raw ID field with Customer Name input -->
+                    <input type="text" id="customerName" value="Nathan Alweendo" required>
+                </div>
+                <div class="form-group">
+                    <label>Select Restaurant Hub</label>
+                    <select id="restaurantId">
+                        <option value="rest-windhoek-oasis">Windhoek Oasis Hub</option>
+                        <option value="rest-coastal-delight">Coastal Delight Hub</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address Street</label>
+                    <input type="text" id="deliveryAddress" value="14 Independence Avenue, Windhoek" required>
+                </div>
+
+                <div class="menu-selection">
+                    <h3>Menu Items</h3>
+                    <div class="menu-item">
+                        <input type="checkbox" id="item1" value="item-01" data-name="Gourmet Beef Burger" data-price="120.00" checked>
+                        <label>Gourmet Beef Burger (N$ 120.00)</label>
+                        <input type="number" id="qty1" value="2" min="1">
+                    </div>
+                    <div class="menu-item">
+                        <input type="checkbox" id="item2" value="item-02" data-name="Large French Fries" data-price="45.00" checked>
+                        <label>Large French Fries (N$ 45.00)</label>
+                        <input type="number" id="qty2" value="1" min="1">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-submit">Submit Order & Pay</button>
+            </form>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

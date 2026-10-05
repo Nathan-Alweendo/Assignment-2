@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Reporting Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1>📊 Admin Reporting <span>Dashboard Hub</span></h1>
+        <div class="navigation-links">
+            <a href="index.html" class="nav-link">🛒 Return to Customer Shop</a>
+        </div>
+    </header>
+
+    <div class="single-panel-container">
+        <section class="panel-section">
+            <div class="admin-title-row">
+                <h2>Operational Performance Audit (Port 8081)</h2>
+                <button id="refresh-metrics-btn" class="btn btn-refresh">🔄 Sync Metrics</button>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Total Gross Revenue</h4>
+                    <p id="metric-revenue">N$ 0.00</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Total Placed Orders</h4>
+                    <p id="metric-orders">0</p>
+                </div>
+                <div class="metric-card">
+                    <h4>System Cancellations</h4>
+                    <p id="metric-cancellations">0</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Cancellation Ratio</h4>
+                    <p id="metric-ratio">0.0%</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

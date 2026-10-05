@@ -1,8 +1,15 @@
 import ballerina/http;
 
+// FIXED: Injected Cross-Origin Resource Sharing rules into the service configuration block
+@http:ServiceConfig {
+    cors: {
+        allowOrigins: ["*"]
+    }
+}
 service /admin on new http:Listener(8081) { // Running on port 8081 to avoid conflicts
 
     # GET Endpoint: Calculates and returns live system performance parameters
+    # + return - A json payload summary containing revenue metrics and platform analytics ratios or a routing error
     resource function get metrics() returns json|error {
         PlatformMetrics m = check fetchCurrentMetrics();
         
